@@ -12,7 +12,7 @@ public class Res {
     }
 
     public void send(String text) throws IOException {
-        resp.getOutputStream().println(text);
+        resp.getOutputStream().print(text);
     }
 
     public void contentType(String contentType) {
