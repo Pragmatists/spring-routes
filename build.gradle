@@ -2,6 +2,11 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.2'
 }
 
+ext {
+    springBootVersion = '1.1.9.RELEASE'
+    springVersion = '4.0.2.RELEASE'
+}
+
 allprojects {
     apply plugin: 'java'
 
@@ -13,12 +18,12 @@ allprojects {
     }
 
     dependencies {
+        compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
+            exclude module: "spring-boot-starter-tomcat"
+        }
 
+        testCompile 'org.assertj:assertj-core:1.7.0'
         testCompile "junit:junit:4.11"
     }
 }
 
-ext {
-    springBootVersion = '1.1.9.RELEASE'
-    springVersion = '4.0.2.RELEASE'
-}

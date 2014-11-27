@@ -1,9 +1,9 @@
-dependencies{
-    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion") {
-        exclude module: "spring-boot-starter-tomcat"
-    }
+dependencies {
     compile("org.springframework.boot:spring-boot-starter-jetty:$springBootVersion")
 
+    compile project(":core")
+
     testCompile 'com.jayway.restassured:rest-assured:2.4.0'
-    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion:pom"
+    testCompile "org.springframework.boot:spring-boot-starter-test:$springBootVersion@pom"
+    testCompile "org.springframework:spring-test:$springVersion"
 }
