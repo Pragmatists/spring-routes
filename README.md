@@ -1,21 +1,22 @@
 spring-routes
 =============
-h1. Introduction
+# Introduction
 TBD
-h1. Features:
-h2. Supported methods:
+# Features:
+## Supported HTTP methods:
 ```
 var app = routes();
-app.get('/user', function(req, resp){
+app
+  .get('/hello', function(req, resp){
     // ...
   })
-  .post('/user', function(req, resp){
+  .post('/hello', function(req, resp){
     // ...
   })
-  .put('/user/', function(req, resp){
+  .put('/hello', function(req, resp){
     // ...
   })
-  .delete('/user/{id}', function(req, resp){
+  .delete('/hello', function(req, resp){
     // ...
   });
 ```
