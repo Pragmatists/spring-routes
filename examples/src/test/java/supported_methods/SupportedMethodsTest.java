@@ -1,33 +1,16 @@
 package supported_methods;
 
-import static com.jayway.restassured.RestAssured.delete;
-import static com.jayway.restassured.RestAssured.get;
-import static com.jayway.restassured.RestAssured.post;
-import static com.jayway.restassured.RestAssured.put;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Before;
+import org.junit.Test;
+import org.springroutes.RoutesBaseTest;
 
 import javax.script.ScriptException;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springroutes.EmptyApplication;
-import org.springroutes.Routes;
-import org.springroutes.ScriptHandler;
+import static com.jayway.restassured.RestAssured.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {EmptyApplication.class, ScriptHandler.class})
-@IntegrationTest
-@WebAppConfiguration
-public class SupportedMethodsTest {
 
-    @Autowired
-    private Routes routes;
+public class SupportedMethodsTest extends RoutesBaseTest {
 
     @Before
     public void setUp() throws ScriptException {
