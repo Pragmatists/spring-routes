@@ -23,11 +23,20 @@ app
 ## Fluent path building:
 ```
 var app = routes();
-app
-  .path('/parent')
-    .get('/child', function(req, resp){
-      // responds to GET /parent/child
-    });
+
+var countries = app.path('/countries');
+
+countries
+	.path('/poland')
+		.get('/capital', function(req, res){
+			res.send('Warsaw');
+		});
+
+countries
+	.path('/germany')
+  		.get('/capital', function(req, res){
+			res.send('Berlin');
+		});	
 
 ```
 ## Support for path variables:
