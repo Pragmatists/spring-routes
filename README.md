@@ -4,7 +4,7 @@ spring-routes
 TBD
 # Features:
 ## Supported HTTP methods:
-```
+```javascript
 var app = routes();
 app
   .get('/hello', function(req, resp){
@@ -21,7 +21,7 @@ app
   });
 ```
 ## Fluent path building:
-```
+```javascript
 var app = routes();
 
 var countries = app.path('/countries');
@@ -40,10 +40,21 @@ countries
 
 ```
 ## Support for path variables:
-```
+```javascript
 var app = routes();
 app
   .get('/hello/{name}', function(req, resp){
     resp.send('Hello ' + req.param('name') + '!');
   });
+```
+## Request
+### Consuming support:
+```javascript
+var app = routes();
+app.consumes('text/csv').post('/import', function(req, resp){
+  // ...
+});
+app.consumes('text/*').post('/wildcard', function(req, resp){
+  // ...
+});
 ```
