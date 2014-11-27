@@ -1,17 +1,28 @@
 package org.springroutes;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.condition.*;
-import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
-
-import javax.script.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.InputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+import javax.script.SimpleScriptContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.condition.ConsumesRequestCondition;
+import org.springframework.web.servlet.mvc.condition.HeadersRequestCondition;
+import org.springframework.web.servlet.mvc.condition.ParamsRequestCondition;
+import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
+import org.springframework.web.servlet.mvc.condition.ProducesRequestCondition;
+import org.springframework.web.servlet.mvc.condition.RequestMethodsRequestCondition;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 
 public class Routes {
 
@@ -114,6 +125,42 @@ public class Routes {
             return this;
         }
 
+        public Route put(String url, Callback handler) {
+            
+            Route copy = this.copy();
+            copy.mapping = mapping.combine(new RequestMappingInfo(
+                    new PatternsRequestCondition(url),
+                    new RequestMethodsRequestCondition(RequestMethod.PUT),
+                    new ParamsRequestCondition(),
+                    new HeadersRequestCondition(),
+                    new ConsumesRequestCondition(),
+                    new ProducesRequestCondition(),
+                    null
+                    ));
+            copy.chain(handler);
+            
+            registerRoute(copy);
+            return this;
+        }
+        
+        public Route del(String url, Callback handler) {
+            
+            Route copy = this.copy();
+            copy.mapping = mapping.combine(new RequestMappingInfo(
+                    new PatternsRequestCondition(url),
+                    new RequestMethodsRequestCondition(RequestMethod.DELETE),
+                    new ParamsRequestCondition(),
+                    new HeadersRequestCondition(),
+                    new ConsumesRequestCondition(),
+                    new ProducesRequestCondition(),
+                    null
+                    ));
+            copy.chain(handler);
+            
+            registerRoute(copy);
+            return this;
+        }
+        
         public Route use(Callback handler) {
 
             Route copy = this.copy();
@@ -192,14 +239,17 @@ public class Routes {
 
         SimpleScriptContext context = new SimpleScriptContext();
         context.setAttribute("_app", this, ScriptContext.ENGINE_SCOPE);
-        engine.eval(script("route.js"), context);
+        engine.eval(script("org/springroutes/route.js"), context);
         engine.eval(script(script), context);
     }
 
     private InputStreamReader script(String script) {
-        InputStream stream = Thread.currentThread().getContextClassLoader().getResourceAsStream(script);
-        InputStreamReader reader = new InputStreamReader(stream);
-        return reader;
+        try {
+            InputStreamReader reader = new InputStreamReader(new ClassPathResource(script).getInputStream());
+            return reader;
+        } catch (IOException e) {
+            throw new IllegalArgumentException(String.format("Script '%s' was not found", script), e);
+        }
     }
 
     public void log(String message) {
