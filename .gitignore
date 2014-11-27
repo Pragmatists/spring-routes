@@ -2,8 +2,6 @@
 .gradle
 temp/
 build/
-gradle/
-gradle*
 
 
 # temp files
