@@ -71,6 +71,16 @@ var route = function(_r){
 			status: function(status){
 				_res.status(status);
 				return r;
+			},
+			set: function(name,value){
+				if(arguments.length === 2 )
+					_res.header(name, value);
+				else {
+					for(property in name){
+						_res.header(property, name[property]);
+					}
+				}
+				return r;
 			}
 		};
 		

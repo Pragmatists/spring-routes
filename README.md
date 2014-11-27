@@ -80,3 +80,31 @@ app
     resp.send('Hello John');
   });
 ```
+## Response
+```
+var app = routes();
+app.get('/greeting', function (req, resp) {
+    resp.send('Hello John');
+});
+
+app.get('/greeting', function (req, resp) {
+    resp.sendJson({'thiIs': 'Json'});
+});
+
+app.get('/greeting', function (req, resp) {
+    resp.status(200);
+});
+
+app.get('/greeting', function (req, resp) {
+    resp.contentType("text/plain");
+});
+
+app.get('/greeting', function (req, resp) {
+    resp.set("header", "value");
+    resp.set({
+          "header1": "value1",
+          "header2": "value2"
+          });
+});
+
+```

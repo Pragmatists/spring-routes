@@ -26,4 +26,8 @@ public class Res {
     public void status(int status) {
         resp.setStatus(status);
     }
+
+    public void header(String name, String value) {
+        resp.addHeader(name, value);
+    }
 }
