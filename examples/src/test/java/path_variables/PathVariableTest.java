@@ -13,7 +13,7 @@ import org.springframework.boot.test.IntegrationTest;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-import org.springroutes.BasicApplication;
+import org.springroutes.EmptyApplication;
 import org.springroutes.Routes;
 import org.springroutes.ScriptHandler;
 
@@ -21,7 +21,7 @@ import com.jayway.restassured.response.Response;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {BasicApplication.class, ScriptHandler.class})
+@SpringApplicationConfiguration(classes = {EmptyApplication.class, ScriptHandler.class})
 @IntegrationTest
 @WebAppConfiguration
 public class PathVariableTest {
