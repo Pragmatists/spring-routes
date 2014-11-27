@@ -15,21 +15,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springroutes.EmptyApplication;
 import org.springroutes.Routes;
+import org.springroutes.RoutesBaseTest;
 import org.springroutes.ScriptHandler;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = {EmptyApplication.class, ScriptHandler.class})
-@IntegrationTest
-@WebAppConfiguration
-public class PathNestingTest {
-
-    @Autowired
-    private Routes routes;
+public class PathNestingTest extends RoutesBaseTest {
 
     @Before
     public void setUp() throws ScriptException {
-
-        routes.registerRoutesFrom("path_nesting/path_nesting.js");
+        registerOnly("path_nesting/path_nesting.js");
     }
     
     @Test

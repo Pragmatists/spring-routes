@@ -42,6 +42,10 @@ public class Routes {
         return new Route("");
     }
 
+    public void clear() {
+        routes.clear();
+    }
+
     public interface Callback {
         public void handle(Req req, Res res, Next next);
     }

@@ -12,7 +12,7 @@ import org.springroutes.RoutesBaseTest;
 public class StatusTest extends RoutesBaseTest {
     @Before
     public void setUp() throws ScriptException {
-        routes.registerRoutesFrom("response/status.js");
+        registerOnly("response/status.js");
     }
 
     @Test

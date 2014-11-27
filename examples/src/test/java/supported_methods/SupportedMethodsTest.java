@@ -15,7 +15,7 @@ public class SupportedMethodsTest extends RoutesBaseTest {
     @Before
     public void setUp() throws ScriptException {
 
-        routes.registerRoutesFrom("supported_methods/supported_methods.js");
+        registerOnly("supported_methods/supported_methods.js");
     }
     
     @Test

@@ -17,7 +17,7 @@ public class ConsumesTest extends RoutesBaseTest {
     @Before
     public void setUp() throws ScriptException {
 
-        routes.registerRoutesFrom("request/consumes.js");
+        registerOnly("request/consumes.js");
     }
 
     @Test

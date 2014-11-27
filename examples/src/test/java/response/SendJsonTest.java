@@ -15,7 +15,7 @@ public class SendJsonTest extends RoutesBaseTest{
 
     @Before
     public void setUp() throws ScriptException {
-        routes.registerRoutesFrom("response/send-json.js");
+        registerOnly("response/send-json.js");
     }
 
     @Test

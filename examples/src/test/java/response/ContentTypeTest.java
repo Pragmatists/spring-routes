@@ -15,7 +15,7 @@ public class ContentTypeTest extends RoutesBaseTest {
 
     @Before
     public void setUp() throws ScriptException {
-        routes.registerRoutesFrom("response/content-type.js");
+        registerOnly("response/content-type.js");
     }
 
     @Test

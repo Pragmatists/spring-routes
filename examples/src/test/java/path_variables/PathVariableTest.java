@@ -16,7 +16,7 @@ public class PathVariableTest extends RoutesBaseTest {
     @Before
     public void setUp() throws ScriptException {
 
-        routes.registerRoutesFrom("path_variables/path_variables.js");
+        registerOnly("path_variables/path_variables.js");
     }
     
     @Test
