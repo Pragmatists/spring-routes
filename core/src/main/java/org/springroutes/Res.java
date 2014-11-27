@@ -19,6 +19,10 @@ public class Res {
         resp.setContentType(contentType);
     }
 
+    public String getContentType() {
+        return resp.getContentType();
+    }
+
     public void status(int status) {
         resp.setStatus(status);
     }

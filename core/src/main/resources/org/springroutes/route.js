@@ -58,6 +58,9 @@ var route = function(_r){
 				return r;
 			},
 			sendJson: function(obj){
+				if(!_res.getContentType()){
+					_res.contentType("application/json");
+				}
 				_res.send(JSON.stringify(obj));
 				return r;
 			},
