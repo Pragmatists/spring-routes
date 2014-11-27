@@ -71,3 +71,12 @@ app.consumes('text/*').post('/wildcard', function(req, resp){
   // ...
 });
 ```
+### Produces:
+```javascript
+var app = routes();
+app
+  .produces("text/plain")
+  .get('/greeting', function (req, resp) {
+    resp.send('Hello John');
+  });
+```
