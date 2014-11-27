@@ -20,6 +20,7 @@
 //};
 
 var bean = function(beanName){
+    _app.log(beanName.type)
 	return _app.bean(beanName);
 };
 

@@ -106,5 +106,12 @@ app.get('/greeting', function (req, resp) {
           "header2": "value2"
           });
 });
-
+```
+## Spring
+```
+var app = routes();
+app.get('/greeting', function (req, resp) {
+    var springBean = bean('myBean');
+    var springBean = bean(org.bean.SpringBean);
+});
 ```
