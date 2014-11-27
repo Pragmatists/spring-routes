@@ -3,9 +3,6 @@ package filters;
 import static com.jayway.restassured.RestAssured.when;
 import static org.hamcrest.Matchers.containsString;
 
-import javax.script.ScriptException;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,19 +23,26 @@ public class FiltersTest {
     @Autowired
     private Routes routes;
 
-    @Before
-    public void setUp() throws ScriptException {
-
-        routes.registerRoutesFrom("filters/filters.js");
-    }
-    
     @Test
     public void decorate_method_with_use() throws Exception {
-        
+
+        routes.registerRoutesFrom("filters/filters.js");
+
         when().
             get("/hello").
         then().
             body(containsString("Hello World!"));
+    }
+    
+    @Test
+    public void decorate_nested_get() throws Exception {
+        
+        routes.registerRoutesFrom("filters/nested_filters.js");
+        
+        when().
+            get("/stuff").
+        then().
+            body(containsString("outer before -> inner before -> stuff -> inner after -> outer after"));
     }
     
 }
