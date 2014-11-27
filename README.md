@@ -20,3 +20,21 @@ app
     // ...
   });
 ```
+## Fluent path building:
+```
+var app = routes();
+app
+  .path('/parent')
+    .get('/child', function(req, resp){
+      // responds to GET /parent/child
+    });
+
+```
+## Support for path variables:
+```
+var app = routes();
+app
+  .get('/hello/{name}', function(req, resp){
+    resp.send('Hello ' + req.param('name') + '!');
+  });
+```
