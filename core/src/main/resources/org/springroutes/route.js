@@ -37,6 +37,15 @@ var route = function(_r){
 	var req = function(_req){
 		
 		try{
+			var params = {};
+			_req.params.forEach(function (key, value) {
+				var p = [];
+				value.forEach(function (e) {
+					p.push(e);
+				});
+				params[key] = (p.length == 1 ? p[0] : p);
+			});
+
 			var bodyJson = JSON.parse(_req.body());
 		} catch(e){
 			// not a json
@@ -44,9 +53,9 @@ var route = function(_r){
 		
 		return {
 			param: function(param){
-				return _req.param(param);
+				return params[param];
 			},
-			params: _req.params,
+			params: params,
 			body: bodyJson || {}
 		};
 	};

@@ -81,7 +81,7 @@ app
   });
 ```
 ## Response
-```
+```javascript
 var app = routes();
 app.get('/greeting', function (req, resp) {
     resp.send('Hello John');
@@ -114,4 +114,16 @@ app.get('/greeting', function (req, resp) {
     var springBean = bean('myBean');
     var springBean = bean(org.bean.SpringBean);
 });
+```
+###Query parameters
+```javascript
+var app = route();
+
+ app
+  .get('/hello-param', function (req, resp) {
+    resp.send(req.param('name'));  // prints 'John' for GET /hello-param?name=John
+  })
+  .get('/hello-params', function (req, resp) {
+    resp.send(req.params.name);  // prints 'John' for GET /hello-params?name=John
+  });
 ```

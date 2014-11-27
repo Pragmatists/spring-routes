@@ -6,6 +6,9 @@ import org.springframework.web.util.UrlPathHelper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Req {
@@ -13,7 +16,7 @@ public class Req {
     private HttpServletRequest req;
     private String url;
 
-    public Map<String, String> params;
+    public Map<String, List<String>> params = new HashMap<>();
     public String body;
 
     public Req(HttpServletRequest req, String url) {
@@ -31,8 +34,12 @@ public class Req {
             String actual = new UrlPathHelper().getLookupPathForRequest(req);
 
             AntPathMatcher pathMatcher = new AntPathMatcher();
-            params = pathMatcher.extractUriTemplateVariables(url, actual);
-
+            for (Map.Entry<String, String> entry : pathMatcher.extractUriTemplateVariables(url, actual).entrySet()) {
+                params.put(entry.getKey(), Arrays.asList(entry.getValue()));
+            }
+            for (Map.Entry<String, String[]> entry : req.getParameterMap().entrySet()) {
+                params.put(entry.getKey(), Arrays.asList(entry.getValue()));
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
